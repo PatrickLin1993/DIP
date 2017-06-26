@@ -14,7 +14,7 @@ maxValue, &x>threshold\cr 0, &x<=threshold\end{cases}
 
 * 高于该阈值则为 `maxValue`，否则为 `0`。
 
-![](../threshold_type1.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_type1.png)
 
 #### 2.2 反二进制阈值化
 
@@ -25,7 +25,7 @@ maxValue, &x>threshold\cr 0, &x<=threshold\end{cases}
 
 * 高于该阈值则为 `0`，否则为 `maxValue`。
 
-![](../threshold_type2.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_type2.png)
 
 #### 2.3 截断阈值化
 
@@ -36,7 +36,7 @@ threshold, &x>=threshold\cr x, &x<threshold\end{cases}
 
 * 高于该阈值则为阈值 `threshold`，否则为原值。
 
-![](../threshold_type3.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_type3.png)
 
 #### 2.4 阈值化为 0
 
@@ -47,7 +47,7 @@ x, &x>=threshold\cr 0, &x<threshold\end{cases}
 
 * 高于该阈值则为原值，否则为 `0`。
 
-![](../threshold_type4.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_type4.png)
 
 #### 2.5 反阈值化为 0
 
@@ -58,7 +58,7 @@ x, &x>=threshold\cr 0, &x<threshold\end{cases}
 
 * 高于该阈值则为 `0`，否则为原值。
 
-![](../threshold_type5.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_type5.png)
 
 ### 3. 代码及结果
 
@@ -116,6 +116,10 @@ void ThresholdUpdate(int, void*)
 	imshow(window_name, dst);
 }
 ```
+
+效果：
+
+![](../pics/threshold_result1.png)
 
 ### 参考
 [1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html)
