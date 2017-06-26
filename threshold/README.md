@@ -7,10 +7,11 @@
 
 #### 2.1 二进制阈值化
 
-\begin{eqnarray}f(x)=
-\begin{cases}
-maxValue, &x>threshold\cr 0, &x<=threshold\end{cases}
-\end{eqnarray}
+```
+f(x) =  
+		maxValue,  if x >  threshold
+        0,         if x <= threshold
+```
 
 * 高于该阈值则为 `maxValue`，否则为 `0`。
 
@@ -18,10 +19,11 @@ maxValue, &x>threshold\cr 0, &x<=threshold\end{cases}
 
 #### 2.2 反二进制阈值化
 
-\begin{eqnarray}f(x)=
-\begin{cases}
-0, &x>threshold\cr maxValue, &x<=threshold\end{cases}
-\end{eqnarray}
+```
+f(x) =  
+		0,         if x >  threshold
+        maxValue,  if x <= threshold
+```
 
 * 高于该阈值则为 `0`，否则为 `maxValue`。
 
@@ -29,10 +31,11 @@ maxValue, &x>threshold\cr 0, &x<=threshold\end{cases}
 
 #### 2.3 截断阈值化
 
-\begin{eqnarray}f(x)=
-\begin{cases}
-threshold, &x>=threshold\cr x, &x<threshold\end{cases}
-\end{eqnarray}
+```
+f(x) =  
+		threshold,  if x >  threshold
+        x,          if x <= threshold
+```
 
 * 高于该阈值则为阈值 `threshold`，否则为原值。
 
@@ -40,10 +43,11 @@ threshold, &x>=threshold\cr x, &x<threshold\end{cases}
 
 #### 2.4 阈值化为 0
 
-\begin{eqnarray}f(x)=
-\begin{cases}
-x, &x>=threshold\cr 0, &x<threshold\end{cases}
-\end{eqnarray}
+```
+f(x) =  
+		0,  if x >  threshold
+        x,  if x <= threshold
+```
 
 * 高于该阈值则为原值，否则为 `0`。
 
@@ -51,16 +55,19 @@ x, &x>=threshold\cr 0, &x<threshold\end{cases}
 
 #### 2.5 反阈值化为 0
 
-\begin{eqnarray}f(x)=
-\begin{cases}
-0, &x>threshold\cr x, &x<=threshold\end{cases}
-\end{eqnarray}
+```
+f(x) =  
+		x,  if x >  threshold
+        0,  if x <= threshold
+```
 
 * 高于该阈值则为 `0`，否则为原值。
 
 ![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_type5.png)
 
 ### 3. 代码及结果
+
+[CPP代码](https://github.com/PatrickLin1993/DIP/blob/master/threshold/threshold.cpp)
 
 ```cpp
 /**
