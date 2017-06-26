@@ -7,6 +7,8 @@
 
 #### 2.1 二进制阈值化
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 \begin{eqnarray}f(x)=
 \begin{cases}
 maxValue, &x>threshold\cr 0, &x<=threshold\end{cases}
