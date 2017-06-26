@@ -7,11 +7,20 @@
 
 #### 2.1 二进制阈值化
 
+<<<<<<< HEAD
 ```
 f(x) =  
 		maxValue,  if x >  threshold
         0,         if x <= threshold
 ```
+=======
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+\begin{eqnarray}f(x)=
+\begin{cases}
+maxValue, &x>threshold\cr 0, &x<=threshold\end{cases}
+\end{eqnarray}
+>>>>>>> origin/master
 
 * 高于该阈值则为 `maxValue`，否则为 `0`。
 
