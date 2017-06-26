@@ -119,7 +119,7 @@ void ThresholdUpdate(int, void*)
 
 效果：
 
-![](../pics/threshold_result1.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_result1.png)
 
 ### 参考
 [1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html)
