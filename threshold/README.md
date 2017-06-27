@@ -121,7 +121,7 @@ void ThresholdUpdate(int, void*)
 
 效果：
 
-![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_result1.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_res.png)
 
 ## 二. 灰度图像分割之阈值处理
 
@@ -142,10 +142,10 @@ void ThresholdUpdate(int, void*)
 #### 1.2 代码及效果
 
 ```cpp
-double GetMeanHist(Mat img, int graylvl)
+double GetMeanThreshold(Mat img, int graylvl)
 {
 	if (img.empty()) {
-		return 0;
+		return 0.0;
 	}
 	
 	// 1. 计算图像灰度直方图
@@ -161,9 +161,10 @@ double GetMeanHist(Mat img, int graylvl)
 	normalize(hist_gray, hist_gray, 1, 0, NORM_L1);
 
 	// 3. 直方图的横坐标乘于概率，然后求和得出阈值
+	double bin_width = (range[1] - range[0]) / graylvl;
 	double thres = 0.0;
 	for (int i = 0; i < graylvl; ++i) {
-		thres += hist_gray.at<float>(i) * i;
+		thres += hist_gray.at<float>(i) * ((i + 0.5) * bin_width);
 	}
 
 	return thres;
@@ -172,7 +173,58 @@ double GetMeanHist(Mat img, int graylvl)
 
 效果：
 
-![meanhist_res1](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/getmeanthreshold_res1.png)
+![meanthreshold_res1](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/getmeanthreshold_res.png)
+
+### 2. P-tile 阈值
+
+#### 2.1 原理
+
+P-tile 阈值即 **p 分位**的阈值， 当 `p = 0.5` 即以中位数为阈值。也就是说，将所有像素值排序，第 `p * totalPixels` 个像素点的值，`p 取 (0, 1]`。 
+
+>```
+>步骤：
+>1) 计算图像灰度直方图
+>2) 取出直方图中第 `p * totalPixels` 个像素点的值
+>```
+
+#### 2.2 代码及效果
+
+```cpp
+double GetPtileThreshold(Mat img, double ptile, int graylvl)
+{
+	if (img.empty()) {
+		return 0.0;
+	}
+
+	// 1. 计算图像灰度直方图
+	if (img.channels() == 3) {
+		cvtColor(img, img, CV_RGB2GRAY);
+	}
+	Mat hist_gray;
+	float range[] = { 0, 255 };
+	const float* hist_range = range;
+	calcHist(&img, 1, 0, Mat(), hist_gray, 1, &graylvl, &hist_range);
+	
+	// 2. 选取 p 分位
+	double count = 0.0;
+	double p_count = img.rows * img.cols * ptile;
+	double bin_width = (range[1] - range[0]) / graylvl;
+	double thres = graylvl;
+	for (int i = 0; i < graylvl; ++i) {
+		count += hist_gray.at<float>(i);
+		if (count >= p_count) {
+			thres = (i + 0.5) * bin_width;
+			break;
+		}
+	}
+	return thres;
+}
+```
+
+
+效果：
+
+![ptilethreshold_res](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/getptilethreshold_res.png)
 
 ### 参考
 [1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html)
