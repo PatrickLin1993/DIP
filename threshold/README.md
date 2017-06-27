@@ -1,15 +1,16 @@
-## 阈值处理
+# 阈值处理
 
-### 1. 基本意义:
+## 一. 阈值处理
+
+### 1 基本意义:
 * 设置一个阈值，将图像中的每一个像素点与阈值进行比较，提取出我们想要的部分。
 
-### 2. 阈值类型:
+### 2 阈值类型:
 
 #### 2.1 二进制阈值化
 
 ```
-f(x) =  
-		maxValue,  if x >  threshold
+f(x) =  maxValue,  if x >  threshold
         0,         if x <= threshold
 ```
 
@@ -20,8 +21,7 @@ f(x) =
 #### 2.2 反二进制阈值化
 
 ```
-f(x) =  
-		0,         if x >  threshold
+f(x) =  0,         if x >  threshold
         maxValue,  if x <= threshold
 ```
 
@@ -32,8 +32,7 @@ f(x) =
 #### 2.3 截断阈值化
 
 ```
-f(x) =  
-		threshold,  if x >  threshold
+f(x) =  threshold,  if x >  threshold
         x,          if x <= threshold
 ```
 
@@ -44,8 +43,7 @@ f(x) =
 #### 2.4 阈值化为 0
 
 ```
-f(x) =  
-		0,  if x >  threshold
+f(x) =  0,  if x >  threshold
         x,  if x <= threshold
 ```
 
@@ -56,8 +54,7 @@ f(x) =
 #### 2.5 反阈值化为 0
 
 ```
-f(x) =  
-		x,  if x >  threshold
+f(x) =  x,  if x >  threshold
         0,  if x <= threshold
 ```
 
@@ -66,8 +63,6 @@ f(x) =
 ![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_type5.png)
 
 ### 3. 代码及结果
-
-[CPP代码](https://github.com/PatrickLin1993/DIP/blob/master/threshold/threshold.cpp)
 
 ```cpp
 /**
@@ -127,6 +122,57 @@ void ThresholdUpdate(int, void*)
 效果：
 
 ![](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/threshold_result1.png)
+
+## 二. 灰度图像分割之阈值处理
+
+### 1. 平均阈值
+
+#### 1.1 原理
+
+平均阈值属于阈值处理中最简单的一种，使用图像中阈值的均值作为阈值，分割图像。 根据统计学，可以使用概率方法如以下步骤：
+
+>```
+>步骤：
+>1) 计算图像灰度直方图
+>2) 直方图归一化，得出每项概率（归一类型为 NORM_L1）
+>3) 均值为横坐标值乘于概率的总和
+>    threshold = mean = sum(p(i) * i)  (i = bins[1], bins[2], ...)
+>```
+
+#### 1.2 代码及效果
+
+```cpp
+double GetMeanHist(Mat img, int graylvl)
+{
+	if (img.empty()) {
+		return 0;
+	}
+	
+	// 1. 计算图像灰度直方图
+	if (img.channels() == 3) {
+		cvtColor(img, img, CV_RGB2GRAY);
+	}
+	Mat hist_gray;
+	float range[] = { 0, 255 };
+	const float* hist_range = range;
+	calcHist(&img, 1, 0, Mat(), hist_gray, 1, &graylvl, &hist_range);
+
+	// 2. 归一化直方图，得出直方图每一项的概率
+	normalize(hist_gray, hist_gray, 1, 0, NORM_L1);
+
+	// 3. 直方图的横坐标乘于概率，然后求和得出阈值
+	double thres = 0.0;
+	for (int i = 0; i < graylvl; ++i) {
+		thres += hist_gray.at<float>(i) * i;
+	}
+
+	return thres;
+}
+```
+
+效果：
+
+![meanhist_res1](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/getmeanthreshold_res1.png)
 
 ### 参考
 [1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html)
