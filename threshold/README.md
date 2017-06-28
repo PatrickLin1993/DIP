@@ -221,10 +221,82 @@ double GetPtileThreshold(Mat img, double ptile, int graylvl)
 }
 ```
 
-
 效果：
 
 ![ptilethreshold_res](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/getptilethreshold_res.png)
 
-### 参考
+### 3. 迭代均值阈值
+
+#### 3.1 原理
+
+通过不停地迭代，直到均值误差在给定的范围内。通常，给定的误差范围越小，迭代次数越多，则得出的均值越准确。
+
+>```
+>步骤：
+>1) 为阈值 T0 选择一个初始估计值 (估计值必须大于最小灰度级，小于最大灰度级，并且 平均灰度 是较好的初始选择)
+>2) 利用 T0 分割图像，产生两组像素，G1 由灰度值小于 T0 的全部像素组成，G2 由灰度值大于 T0 的全部像素组成
+>3) 对 G1 和 G2 分别求出平均灰度值 m1 和 m2
+>4) 计算出一个新的阈值 T1 = (m1 + m2) / 2
+>5) 重复 2) 到 4）（以 T1 为下一轮的 T0），直到 deltaT = abs(T1 - T0) 小于给定的误差范围
+>```
+
+#### 3.2 代码及效果
+
+```cpp
+double GetIterativeThreshold(Mat img, double thres0, double delta, int graylvl) 
+{
+	if (img.empty()) {
+		return 0.0;
+	}
+
+	if (img.channels() == 3) {
+		cvtColor(img, img, CV_RGB2GRAY);
+	}
+	Mat hist_gray;
+	float range[] = { 0, 255 };
+	const float* hist_range = range;
+	calcHist(&img, 1, 0, Mat(), hist_gray, 1, &graylvl, &hist_range);
+
+	// 1. 初始化估计值 T
+	double thres_val = thres0;
+	
+	double thres_delta = delta + 1;
+	double bin_width = (range[1] - range[0]) / graylvl;
+	while (thres_delta > delta) {
+		double thres_last = thres_val;
+
+		// 2. 利用估计值 T 产生两组图像， G1 由小于 T 的所有像素组成， G2 由大于 T 的所有像素组成。
+		long long g1_val = 0, g2_val = 0;
+		long long g1_count = 0, g2_count = 0;
+		for (int i = 0; i < graylvl; ++i) {
+			if (i <= thres_val) {
+				g1_count += hist_gray.at<float>(i);
+				g1_val += hist_gray.at<float>(i) * ((i + 0.5) * bin_width);
+			}
+			else {
+				g2_count += hist_gray.at<float>(i);
+				g2_val += hist_gray.at<float>(i) * ((i + 0.5) * bin_width);
+			}
+		}
+
+		// 3. 对 G1 和 G2 分别计算平均灰度值 m1 和 m2 
+		double m1 = g1_val / g1_count;
+		double m2 = g2_val / g2_count;
+
+		// 4. 获得一个新的阈值
+		thres_val = (m1 + m2) / 2;
+
+		// 5. 计算 delta 并根据 delta 重复计算直到满足条件
+		thres_delta = abs(thres_last - thres_val);
+	}
+
+	return thres_val;
+}
+```
+
+效果：
+
+![getiterativethreshold](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/getiterativethreshold_res.png)
+
+## 参考
 [1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html)
