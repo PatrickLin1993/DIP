@@ -6,11 +6,11 @@
 
 计算直方图 `cv::calcHist` 函数
 >```
-void calcHist( const Mat* images, int nimages,
-                          const int* channels, InputArray mask,
-                          OutputArray hist, int dims, const int* histSize,
-                          const float** ranges, bool uniform = true, bool accumulate = false );
-```
+>void calcHist( const Mat* images, int nimages,
+>                          const int* channels, InputArray mask,
+>                          OutputArray hist, int dims, const int* histSize,
+>                          const float** ranges, bool uniform = true, bool accumulate = false );
+>```
 
 其中
 
