@@ -88,7 +88,7 @@ Mat DrawHist(Mat img, int histSize)
 
 直方图均衡化指，将某些图片过于集中的像素进行拉伸，使得图片直方图分布更加均匀，从而达到增强对比度，增强图像的方法。过程如下图：
 
-![](https://github.com/PatrickLin1993/DIP/blob/master/histogram/pics/equalization_theory1.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/histogram/pics/equalization_theory1.jpg)
 
 ![](https://github.com/PatrickLin1993/DIP/blob/master/histogram/pics/equalization_theory2.png)
 
