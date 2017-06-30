@@ -86,9 +86,11 @@ Mat DrawHist(Mat img, int histSize)
 
 #### 2.1 解释和原理
 
-直方图均衡化指，将某些图片过于集中的像素进行拉伸，使得图片直方图分布更加均匀，从而达到增强对比度，增强图像的方法。过程如下图：
+直方图均衡化，指将某些图片过于集中的像素进行拉伸，使得图片直方图分布更加均匀，从而达到增强对比度，增强图像的方法。过程如下图：
 
 ![](https://github.com/PatrickLin1993/DIP/blob/master/histogram/pics/equalization_theory1.jpg)
+
+数学原理如下：
 
 ![](https://github.com/PatrickLin1993/DIP/blob/master/histogram/pics/equalization_theory2.png)
 
@@ -158,4 +160,5 @@ Mat HistEqualization(Mat srcImg, int histSize)
 
 ### 参考:
 [1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html#histogram-calculation](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html#histogram-calculation)
+
 [2] [灰度图像--图像增强 直方图均衡化（Histogram equalization）](http://blog.csdn.net/tonyshengtan/article/details/43448787)
