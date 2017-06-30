@@ -159,6 +159,6 @@ Mat HistEqualization(Mat srcImg, int histSize)
 ### 3 直方图匹配（直方图规定化）
 
 ### 参考:
-[1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html#histogram-calculation](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html#histogram-calculation)
+[1] [直方图计算](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html#histogram-calculation)
 
 [2] [灰度图像--图像增强 直方图均衡化（Histogram equalization）](http://blog.csdn.net/tonyshengtan/article/details/43448787)

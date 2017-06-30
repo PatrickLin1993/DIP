@@ -311,4 +311,4 @@ double GetIterativeThreshold(Mat img, double thres0, double delta, int graylvl)
 ![getiterativethreshold](https://github.com/PatrickLin1993/DIP/blob/master/threshold/pics/getiterativethreshold_res.png)
 
 ## 参考
-[1] [http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html)
+[1] [基本的阈值操作](http://www.opencv.org.cn/opencvdoc/2.3.2/html/doc/tutorials/imgproc/threshold/threshold.html)
