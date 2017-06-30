@@ -142,6 +142,10 @@ void ThresholdUpdate(int, void*)
 #### 1.2 代码及效果
 
 ```cpp
+/**
+@version: opencv-3.2.0-vc14
+@patrick 2017-6-27
+**/
 double GetMeanThreshold(Mat img, int graylvl)
 {
 	if (img.empty()) {
@@ -190,6 +194,10 @@ P-tile 阈值即 **p 分位**的阈值， 当 `p = 0.5` 即以中位数为阈值
 #### 2.2 代码及效果
 
 ```cpp
+/**
+@version: opencv-3.2.0-vc14
+@patrick 2017-6-27
+**/
 double GetPtileThreshold(Mat img, double ptile, int graylvl)
 {
 	if (img.empty()) {
@@ -243,6 +251,10 @@ double GetPtileThreshold(Mat img, double ptile, int graylvl)
 #### 3.2 代码及效果
 
 ```cpp
+/**
+@version: opencv-3.2.0-vc14
+@patrick 2017-6-27
+**/
 double GetIterativeThreshold(Mat img, double thres0, double delta, int graylvl) 
 {
 	if (img.empty()) {
