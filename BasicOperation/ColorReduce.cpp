@@ -92,12 +92,12 @@ void colorReduce4(Mat img, int div)
 	int channels = img.channels();
 	for (int i = 0; i < r; ++i){
 		for (int j = 0; j < c; ++j){
-			// 单通道
 			if (channels == 1){
+				// 单通道
 				pData[i * step0 + j] = pData[i * step0 + j] / div * div;
 			}
-			// 三通道
 			else if (channels == 3){
+				// 三通道
 				pData[i * step0 + j * step1 + 0 * eleSize1] = pData[i * step0 + j * step1 + 0 * eleSize1] / div * div;
 				pData[i * step0 + j * step1 + 1 * eleSize1] = pData[i * step0 + j * step1 + 1 * eleSize1] / div * div;
 				pData[i * step0 + j * step1 + 2 * eleSize1] = pData[i * step0 + j * step1 + 2 * eleSize1] / div * div;
@@ -115,10 +115,11 @@ int main(int argv, char** argc)
 	cout << "rows = " << src.rows << endl;
 	cout << "cols = " << src.cols << endl;
 	cout << "channels = " << src.channels() << endl;
+	cout << "dimmension = " << src.dims << endl;
 	cout << "step = " << src.step << endl;
-	// 每个行所占字节数 = step[1] * cols
+	// (二维图像)每个行所占字节数 = step[1] * cols
 	cout << "step[0] = " << src.step[0] << endl;
-	// 每个点（元素）所占字节数 = elemSize
+	// (二维图像)每个点（元素）所占字节数 = elemSize
 	cout << "step[1] = " << src.step[1] << endl;
 	// 每个元素所占字节数 = eleSize1 * channels
 	cout << "elemSize() = " << src.elemSize() << endl;
