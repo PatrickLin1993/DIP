@@ -115,6 +115,8 @@ void colorReduce4(Mat img, int div)
 
 ### 总结
 
+[CPP 代码](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/ColorReduce.cpp)
+
 ![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/res1.png)
 
 实验结论：
