@@ -92,9 +92,11 @@ void colorReduce4(Mat img, int div)
 	int channels = img.channels();
 	for (int i = 0; i < r; ++i){
 		for (int j = 0; j < c; ++j){
+			// 单通道
 			if (channels == 1){
 				pData[i * step0 + j] = pData[i * step0 + j] / div * div;
 			}
+			// 三通道
 			else if (channels == 3){
 				pData[i * step0 + j * step1 + 0 * eleSize1] = pData[i * step0 + j * step1 + 0 * eleSize1] / div * div;
 				pData[i * step0 + j * step1 + 1 * eleSize1] = pData[i * step0 + j * step1 + 1 * eleSize1] / div * div;
