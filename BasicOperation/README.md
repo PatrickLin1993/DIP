@@ -115,7 +115,7 @@ void colorReduce4(Mat img, int div)
 
 ### 总结
 
-![]()
+![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/res1.png)
 
 实验结论：
 
