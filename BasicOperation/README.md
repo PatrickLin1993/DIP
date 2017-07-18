@@ -86,6 +86,14 @@ void colorReduce3(Mat img, int div)
 
 但是对于连续图像，可以将图像看成一维数组，进行地址计算访问，是效率最高的方法。
 
+其中，对于 `Mat` 中 `step` 的概念如下二图：
+
+* 对于二维存储 
+![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/pics/step1.png)
+
+* 对于三维存储（按面存储）
+![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/pics/step2.png)
+
 ```cpp
 void colorReduce4(Mat img, int div)
 {
@@ -117,7 +125,7 @@ void colorReduce4(Mat img, int div)
 
 [CPP 代码](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/ColorReduce.cpp)
 
-![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/res1.png)
+![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/pics/res1.png)
 
 实验结论：
 
