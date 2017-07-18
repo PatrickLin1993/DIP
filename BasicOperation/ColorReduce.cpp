@@ -106,6 +106,17 @@ void colorReduce4(Mat img, int div)
 	}
 }
 
+// 对于有映射关系来处理图像的，可以通过LUT来进行映射
+void colorReduce5(Mat img, int div)
+{
+	Mat LookUpTable(1, 256, CV_8UC1);
+	uchar* pTable = LookUpTable.data;
+	for (int i = 0; i < 256; ++i){
+		pTable[i] = i / div * div;
+	}
+	LUT(img, LookUpTable, img);
+}
+
 int main(int argv, char** argc)
 {
 	Mat src = imread("test.jpg", IMREAD_COLOR);
@@ -156,6 +167,13 @@ int main(int argv, char** argc)
 	duration = static_cast<double>(getTickCount()) - duration;
 	duration /= getTickFrequency();
 	cout << "对于连续图像，通过计算地址 : " << duration << endl;
+
+	img = src.clone();
+	duration = static_cast<double>(getTickCount());
+	colorReduce5(img, 64);
+	duration = static_cast<double>(getTickCount()) - duration;
+	duration /= getTickFrequency();
+	cout << "对于有映射关系，通过LUT : " << duration << endl;
 
 	namedWindow("res", WINDOW_NORMAL);
 	imshow("res", img);

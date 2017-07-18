@@ -1,6 +1,6 @@
 # 图像基本操作
 
-## 1. 遍历图像
+## 1. 像素处理
 
 ### 1.1 通过 at 进行访问
 
@@ -80,11 +80,13 @@ void colorReduce3(Mat img, int div)
 }
 ```
 
-### 1.4 对于连续图像，通过计算地址进行访问
+### *1.4 对于连续图像，通过计算地址进行访问
 
-前三种为常用方法。
+前三种为常用的基本方法。后两种为特例情况。
 
-但是对于连续图像，可以将图像看成一维数组，进行地址计算访问，是效率最高的方法。
+对于连续图像，可以将图像看成一维数组，进行地址计算访问，是效率最高的方法。
+
+当然，不像以前用 `IplImage` 需要考虑连续性问题，现在内存分配基本都是连续的，除了提取 `ROI` 是非连续的。
 
 其中，对于 `Mat` 中 `step` 的概念如下二图：
 
@@ -125,6 +127,22 @@ void colorReduce4(Mat img, int div)
 }
 ```
 
+### *1.5 对于有映射关系来处理图像的，可以通过LUT来进行映射处理
+
+对于具有映射关系处理图像的，可以通过LUT(LookUpTable)，进行映射处理.
+
+```cpp
+void colorReduce5(Mat img, int div)
+{
+	Mat LookUpTable(1, 256, CV_8UC1);
+	uchar* pTable = LookUpTable.data;
+	for (int i = 0; i < 256; ++i){
+		pTable[i] = i / div * div;
+	}
+	LUT(img, LookUpTable, img);
+}
+```
+
 ### 总结
 
 [CPP 代码](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/ColorReduce.cpp)
@@ -133,8 +151,8 @@ void colorReduce4(Mat img, int div)
 
 实验结论：
 
-* 通过 `at` 进行访问最直观简单，效率最低。
+* 通过 `at` 可随机访问，但效率最低。
 * 通过`指针访问`进行效率很高，但需注意指针安全。
 * 通过`迭代器`进行访问次之，但是最安全。
 * 对于连续图像，可以通过`地址计算`进行访问，效率奇高。
-
+* 对于处理具有映射关系的，使用`LUT`不仅直观简单，而且效率更佳。
