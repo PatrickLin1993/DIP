@@ -89,9 +89,11 @@ void colorReduce3(Mat img, int div)
 其中，对于 `Mat` 中 `step` 的概念如下二图：
 
 * 对于二维存储 
+
 ![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/pics/step1.png)
 
 * 对于三维存储（按面存储）
+
 ![](https://github.com/PatrickLin1993/DIP/blob/master/BasicOperation/pics/step2.png)
 
 ```cpp
