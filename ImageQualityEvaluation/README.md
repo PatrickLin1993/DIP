@@ -111,3 +111,7 @@ Scalar getMSSIM(const Mat& I1, const Mat& I2)
 [CPP 代码](https://github.com/PatrickLin1993/DIP/blob/master/ImageQualityEvaluation/ImageQualityEvaluation.cpp)
 
 ![](https://github.com/PatrickLin1993/DIP/blob/master/ImageQualityEvaluation/pics/res.png)
+
+## 参考
+
+[官方教程 - Video Input with OpenCV and similarity measurement](http://docs.opencv.org/3.2.0/d5/dc4/tutorial_video_input_psnr_ssim.html)
